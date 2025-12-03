@@ -100,7 +100,6 @@ export default {
   font-size: 30px;
   line-height: 150%;
   font-weight: 600;
-  color: #e63946;
 }
 
 .items-grid {
@@ -208,7 +207,6 @@ export default {
 .placeholder-img {
   width: 100%;
   height: 100%;
-  background-color: #e0e0e0;
 }
 
 .icon-content {
@@ -221,13 +219,11 @@ export default {
   line-height: 120%;
   font-weight: 600;
   margin: 0 0 10px 0;
-  color: #1a1a1a;
 }
 
 .item-desc {
   font-size: 16px;
   line-height: 150%;
-  color: #666666;
 
   ::v-deep p {
     margin: 0 0 8px 0;

@@ -146,22 +146,22 @@ export default {
     if (!this.localConfig.items || this.localConfig.items.length === 0) {
       this.localConfig.items = [
         {
-          image: [],
+          image: ['https://cdn.pixabay.com/photo/2022/02/09/08/35/tiktok-7002882_1280.png'],
           title: 'Free shipping',
           content: 'Free shipping on all orders over $100'
         },
         {
-          image: [],
+          image: ['https://cdn.pixabay.com/photo/2022/02/09/08/35/tiktok-7002882_1280.png'],
           title: '14-day returns',
           content: '14-day hassle-free returns with simple steps'
         },
         {
-          image: [],
+          image: ['https://cdn.pixabay.com/photo/2022/02/09/08/35/tiktok-7002882_1280.png'],
           title: 'Secure payment',
           content: 'Multiple secure payment methods'
         },
         {
-          image: [],
+          image: ['https://cdn.pixabay.com/photo/2022/02/09/08/35/tiktok-7002882_1280.png'],
           title: '24/7 Service',
           content: '24/7 customer service to assist with sizing, orders, or returns'
         }
