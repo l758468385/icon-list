@@ -6,12 +6,7 @@
         <IconListConfig v-model="config" />
       </div>
       
-      <div class="preview-panel">
-        <h2>Preview</h2>
-        <div class="preview-area">
-          <IconList :config="config" />
-        </div>
-      </div>
+       <IconList :config="config" />
     </div>
   </div>
 </template>
@@ -79,12 +74,12 @@ body {
   box-shadow: 0 2px 12px rgba(0,0,0,0.1);
 }
 
-h2 {
+/* h2 {
   margin-top: 0;
   border-bottom: 1px solid #eee;
   padding-bottom: 10px;
   margin-bottom: 20px;
-}
+} */
 
 .preview-area {
   border: 1px dashed #ccc;

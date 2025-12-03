@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .icon-list-module {
   padding: 40px 0;
   width: 100%;
@@ -86,94 +86,119 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-}
-.container.wide-screen {
-  max-width: 100%;
-  padding: 0 40px;
+
+  &.wide-screen {
+    max-width: 100%;
+    padding: 0 40px;
+  }
 }
 
 .module-title {
-  margin-bottom: 40px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
+  margin-bottom: 30px;
+  font-size: 30px;
+  line-height: 150%;
+  font-weight: 600;
+  color: #e63946;
 }
 
 .items-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the grid items if they don't fill the row */
-}
 
-/* PC Grid Logic: Auto-fit up to 4 columns, but respect item count for centering */
-.items-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-.items-grid.items-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-.items-grid.items-2 {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 800px; /* Constrain width for better look with fewer items */
-  margin-left: auto;
-  margin-right: auto;
-}
-.items-grid.items-1 {
-  grid-template-columns: 1fr;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+  // 默认：一行最多4列
+  .icon-item {
+    flex: 1 1 calc(25% - 15px);
+    max-width: calc(25% - 15px);
+  }
+
+  // 3个项目：均分3列
+  &.items-3 .icon-item {
+    flex: 1 1 calc(33.333% - 13.34px);
+    max-width: calc(33.333% - 13.34px);
+  }
+
+  // 2个项目：均分2列
+  &.items-2 .icon-item {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+
+  // 1个项目：1列
+  &.items-1 .icon-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .icon-item {
   display: flex;
-  background: transparent; /* Card bg is handled by module or individual if needed */
+  background: #ffffff;
+  padding: 20px 15px; // PC端 20px 15px
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  box-sizing: border-box; // 包含内边距，防止四列时换行
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  // 上下布局
+  &.layout-top {
+    flex-direction: column;
+
+    .icon-image-wrapper {
+      margin-bottom: 12px;
+    }
+
+    &.text-center {
+      align-items: center;
+      text-align: center;
+
+      .icon-image-wrapper {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    &.text-left {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    &.text-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+  }
+
+  // 左右布局
+  &.layout-left {
+    flex-direction: row;
+    align-items: flex-start;
+
+    .icon-image-wrapper {
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    &.text-center {
+      text-align: center;
+    }
+
+    &.text-left {
+      text-align: left;
+    }
+
+    &.text-right {
+      text-align: right;
+    }
+  }
 }
 
-/* --- Layout: Image Top --- */
-.icon-item.layout-top {
-  flex-direction: column;
-}
-.icon-item.layout-top .icon-image-wrapper {
-  margin-bottom: 16px; /* Spacing from design */
-  margin-left: auto;
-  margin-right: auto;
-}
-/* Alignment for Top Layout */
-.icon-item.layout-top.text-center {
-  align-items: center;
-  text-align: center;
-}
-.icon-item.layout-top.text-left {
-  align-items: flex-start;
-  text-align: left;
-}
-.icon-item.layout-top.text-right {
-  align-items: flex-end;
-  text-align: right;
-}
-
-/* --- Layout: Image Left --- */
-.icon-item.layout-left {
-  flex-direction: row;
-  align-items: flex-start;
-}
-.icon-item.layout-left .icon-image-wrapper {
-  margin-right: 16px; /* Spacing from design */
-  flex-shrink: 0;
-}
-/* Alignment for Left Layout */
-.icon-item.layout-left.text-center {
-  text-align: center;
-}
-.icon-item.layout-left.text-left {
-  text-align: left;
-}
-
-/* --- Image & Content --- */
 .icon-image-wrapper {
-  width: 50px;
-  height: 50px;
+  width: 48px; // PC端 40x40
+  height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,7 +214,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: #e0e0e0;
-  border-radius: 4px;
 }
 
 .icon-content {
@@ -198,62 +222,103 @@ export default {
 }
 
 .item-title {
-  font-size: 24px;
-  line-height: 1.2;
-  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
   margin: 0 0 8px 0;
-  color: #333333;
+  color: #1a1a1a;
 }
 
 .item-desc {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333333;
-}
-/* Reset p margins in rich text if needed */
-.item-desc ::v-deep p {
-  margin: 0 0 10px 0;
-}
-.item-desc ::v-deep p:last-child {
-  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666666;
+
+  ::v-deep p {
+    margin: 0 0 8px 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
-/* --- Responsive --- */
+// 响应式 - 平板
+@media (max-width: 1024px) {
+  .items-grid {
+    gap: 16px;
+
+    // 平板：最多3列
+    .icon-item {
+      flex: 0 0 calc(33.333% - 10.67px);
+    }
+
+    &.items-2 .icon-item,
+    &.items-1 .icon-item {
+      flex: 0 0 calc(50% - 8px);
+    }
+
+    &.items-1 .icon-item {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+// 响应式 - 移动端
 @media (max-width: 768px) {
   .icon-list-module {
-    padding: 20px 0;
+    padding: 24px 0;
   }
-  
+
   .container {
-    padding: 0 15px;
-  }
-  .container.wide-screen {
-    padding: 0 15px;
+    padding: 0 16px;
+
+    &.wide-screen {
+      padding: 0 16px;
+    }
   }
 
-  /* Mobile Grid Overrides */
-  .items-grid.mobile-col-1,
-  .items-grid.mobile-col-1.items-2,
-  .items-grid.mobile-col-1.items-3,
-  .items-grid.mobile-col-1.items-4 {
-    grid-template-columns: 1fr;
-    max-width: 100%; /* Reset max-width */
-  }
-  
-  .items-grid.mobile-col-2,
-  .items-grid.mobile-col-2.items-2,
-  .items-grid.mobile-col-2.items-3,
-  .items-grid.mobile-col-2.items-4 {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 100%; /* Reset max-width */
+  .module-title {
+    margin-bottom: 15px;
+    font-size: 18px;
   }
 
-  /* Mobile Font Scaling */
+  .items-grid {
+    gap: 12px;
+
+    // 移动端：根据配置显示1列或2列
+    .icon-item {
+      flex: 0 0 100%; // 默认1列
+    }
+
+    &.mobile-col-2 .icon-item {
+      flex: 0 0 calc(50% - 6px); // 配置2列
+    }
+  }
+
+  .icon-item {
+    padding: 15px 10px;
+
+    &.layout-top .icon-image-wrapper {
+      margin-bottom: 10px;
+    }
+
+    &.layout-left .icon-image-wrapper {
+      margin-right: 10px;
+    }
+  }
+
+  .icon-image-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+
   .item-title {
-    font-size: 18px; /* 75% of 24px */
+    font-size: 14px;
   }
+
   .item-desc {
-    font-size: 13.6px; /* 85% of 16px */
+    font-size: 12px;
   }
 }
 </style>
