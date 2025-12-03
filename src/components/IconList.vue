@@ -96,7 +96,7 @@ export default {
 }
 
 .module-title {
-  margin-bottom: 30px;
+  margin: 0 0 30px 0;
   font-size: 30px;
   line-height: 150%;
   font-weight: 600;
