@@ -5,7 +5,7 @@
         <h2>Configuration</h2>
         <IconListConfig v-model="config" />
       </div>
-      
+
        <IconList :config="config" />
     </div>
   </div>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       config: {
-        title: '',
+        title: '功能特点',
         align: 'center',
         text_align: 'left',
         layout: 'image_left',
@@ -42,12 +42,11 @@ export default {
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: #f0f2f5;
   color: #333;
 }
 
 #app {
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .demo-container {

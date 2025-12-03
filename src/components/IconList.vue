@@ -1,32 +1,33 @@
 <template>
-  <div class="icon-list-module" :style="{ backgroundColor: config.bg_color }">
+  <div class="icon-list-module">
     <div class="container" :class="{ 'wide-screen': config.wildscreen }">
       <!-- Module Title -->
-      <h2 
-        v-if="config.title" 
+      <h2
+        v-if="config.title"
         class="module-title"
         :style="{ textAlign: config.align }"
       >
         {{ config.title }}
       </h2>
-      
+
       <!-- Items Grid -->
-      <div 
-        class="items-grid" 
+      <div
+        class="items-grid"
         :class="[gridClasses, `items-${config.items.length}`]"
       >
-        <div 
-          v-for="(item, index) in config.items" 
-          :key="index" 
+        <div
+          v-for="(item, index) in config.items"
+          :key="index"
           class="icon-item"
           :class="[itemLayoutClass, 'text-' + config.text_align]"
+          :style="{ backgroundColor: config.bg_color }"
         >
           <!-- Image Wrapper -->
           <div class="icon-image-wrapper">
-             <img 
-               v-if="item.image && item.image.length" 
-               :src="item.image[0]" 
-               :alt="item.title" 
+             <img
+               v-if="item.image && item.image.length"
+               :src="item.image[0]"
+               :alt="item.title"
                class="icon-img"
              />
              <div v-else class="placeholder-img"></div>
@@ -77,9 +78,10 @@ export default {
 
 <style lang="scss" scoped>
 .icon-list-module {
-  padding: 40px 0;
+  padding: 40px 30px;
   width: 100%;
   box-sizing: border-box;
+  color: #333;
 }
 
 .container {
@@ -104,24 +106,24 @@ export default {
 .items-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px; // PC端 30px
 
   // 默认：一行最多4列
   .icon-item {
-    flex: 1 1 calc(25% - 15px);
-    max-width: calc(25% - 15px);
+    flex: 1 1 calc(25% - 22.5px); // (30px * 3) / 4 = 22.5px
+    max-width: calc(25% - 22.5px);
   }
 
   // 3个项目：均分3列
   &.items-3 .icon-item {
-    flex: 1 1 calc(33.333% - 13.34px);
-    max-width: calc(33.333% - 13.34px);
+    flex: 1 1 calc(33.333% - 20px); // (30px * 2) / 3 = 20px
+    max-width: calc(33.333% - 20px);
   }
 
   // 2个项目：均分2列
   &.items-2 .icon-item {
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
+    flex: 1 1 calc(50% - 15px); // (30px * 1) / 2 = 15px
+    max-width: calc(50% - 15px);
   }
 
   // 1个项目：1列
@@ -133,22 +135,15 @@ export default {
 
 .icon-item {
   display: flex;
-  background: #ffffff;
   padding: 20px 15px; // PC端 20px 15px
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease;
   box-sizing: border-box; // 包含内边距，防止四列时换行
-
-  &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  }
 
   // 上下布局
   &.layout-top {
     flex-direction: column;
 
     .icon-image-wrapper {
-      margin-bottom: 12px;
+      margin-bottom: 20px; // PC端 20px
     }
 
     &.text-center {
@@ -175,10 +170,10 @@ export default {
   // 左右布局
   &.layout-left {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center; // 竖直方向居中
 
     .icon-image-wrapper {
-      margin-right: 12px;
+      margin-right: 20px; // PC端 20px
       flex-shrink: 0;
     }
 
@@ -222,16 +217,16 @@ export default {
 }
 
 .item-title {
-  font-size: 16px;
-  line-height: 1.4;
+  font-size: 24px;
+  line-height: 120%;
   font-weight: 600;
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
   color: #1a1a1a;
 }
 
 .item-desc {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 150%;
   color: #666666;
 
   ::v-deep p {
@@ -267,7 +262,7 @@ export default {
 // 响应式 - 移动端
 @media (max-width: 768px) {
   .icon-list-module {
-    padding: 24px 0;
+    padding: 20px 10px;
   }
 
   .container {
@@ -284,15 +279,17 @@ export default {
   }
 
   .items-grid {
-    gap: 12px;
+    gap: 10px; // 移动端 10px
 
-    // 移动端：根据配置显示1列或2列
+    // 移动端：最多2列，覆盖所有 PC 端的规则
     .icon-item {
-      flex: 0 0 100%; // 默认1列
+      flex: 0 0 100% !important; // 默认1列
+      max-width: 100% !important;
     }
 
     &.mobile-col-2 .icon-item {
-      flex: 0 0 calc(50% - 6px); // 配置2列
+      flex: 0 0 calc(50% - 5px) !important; // 配置2列
+      max-width: calc(50% - 5px) !important;
     }
   }
 
@@ -300,11 +297,11 @@ export default {
     padding: 15px 10px;
 
     &.layout-top .icon-image-wrapper {
-      margin-bottom: 10px;
+      margin-bottom: 15px; // 移动端 15px
     }
 
     &.layout-left .icon-image-wrapper {
-      margin-right: 10px;
+      margin-right: 10px; // 移动端 10px
     }
   }
 
@@ -314,11 +311,12 @@ export default {
   }
 
   .item-title {
-    font-size: 14px;
+    font-size: 18px;
+    margin-bottom: 5px;
   }
 
   .item-desc {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 </style>
